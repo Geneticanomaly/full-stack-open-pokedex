@@ -7,7 +7,6 @@ module.exports = {
   },
   extends: ['eslint:recommended', 'plugin:react/recommended'],
   parserOptions: {
-    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
@@ -16,6 +15,7 @@ module.exports = {
   },
   plugins: ['react', 'jest'],
   rules: {
+    'no-console': 'off',
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
