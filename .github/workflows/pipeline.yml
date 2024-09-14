@@ -35,6 +35,22 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
+      - name: Success
+        if: ${{ success() }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@08d9328877d6954120eef2b07abbc79249bb6210
+        with:
+          args: A new Pokedex version deployed.
+
+      - name: Failure
+        if: ${{ failure() }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@08d9328877d6954120eef2b07abbc79249bb6210
+        with:
+          args: 'Commit {{ EVENT_PAYLOAD.commits.0.url }} by {{ EVENT_PAYLOAD.repository.owner.name }} broke the build!'
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
