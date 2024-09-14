@@ -49,7 +49,7 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: 'Commit {{ EVENT_PAYLOAD.commits.0.url }} by {{ EVENT_PAYLOAD.repository.owner.name }} broke the build'
+          args: 'Commit {{ EVENT_PAYLOAD.commits.0.url }} by {{ EVENT_PAYLOAD.repository.owner.name }} broke the build!'
 
   tag_release:
     needs: [simple_deployment_pipeline]
